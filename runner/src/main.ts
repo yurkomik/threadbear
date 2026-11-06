@@ -3,7 +3,7 @@
 // THREADBEAR_PORT pointing at temp places.
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadConfig, ensureHome, readToken, paths, recordListening, defaultHome, DEFAULT_CWD, RUNNER_VERSION } from './config.ts';
+import { loadConfig, ensureHome, readToken, paths, recordListening, defaultHome, alwaysTrusted, DEFAULT_CWD, RUNNER_VERSION } from './config.ts';
 import { startHousekeeping } from './housekeeping.ts';
 import { RELEASE, markGoodLater, onSupervisorGone, ownCheckout, readRelease, readState, requestHandover, supervised, takeRollbackNotice, tellLaunchListening } from './release.ts';
 import { PatchTrust } from './patch-trust.ts';
@@ -207,7 +207,7 @@ async function main(): Promise<void> {
     clock: realClock,
     log,
     models,
-    patchTrust: new PatchTrust({ file: path.join(cfg.home, 'patch-trust.json'), always: [ownCheckout()] }),
+    patchTrust: new PatchTrust({ file: path.join(cfg.home, 'patch-trust.json'), always: [ownCheckout(), ...alwaysTrusted(cfg.home)] }),
     // Keeps any text end_turn's own sign-up or wait_for_app_restart gave.
     appRestartAsked: (threadId) => {
       if (!appRestarts.isWatching(threadId)) appRestarts.watch(threadId);

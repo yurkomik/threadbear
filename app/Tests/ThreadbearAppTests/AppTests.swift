@@ -516,7 +516,7 @@ final class DraftTests: XCTestCase {
         }
         XCTAssertEqual(app.selection, "th_new")
         XCTAssertNil(app.newThreadCwd)
-        XCTAssertEqual(app.newThreadPermission, .full)
+        XCTAssertEqual(app.newThreadPermission, .auto)
         XCTAssertNil(app.newThreadAccount, "a picked account is for that draft only")
         XCTAssertEqual(app.lastAccountId, "claude-3")
         XCTAssertEqual(app.newThreadAccountId, "claude-3", "with no usage known, the last-used one")

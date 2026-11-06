@@ -142,6 +142,9 @@ export function threadEnv(threadId: string, home: string, basePath = process.env
     THREADBARE_THREAD_ID: threadId,
     THREADBARE_HOME: home,
     THREADBARE_RUNNER_HOME: home,
+    // Session Fleet's Listen hook (NEOCRM scripts/fleet) would wake a thread
+    // from outside, behind end_turn's status; 0 turns it off here.
+    FLEET_LISTEN_MINUTES: '0',
     PATH: basePath ? `${BIN_DIR}:${basePath}` : BIN_DIR,
   };
 }

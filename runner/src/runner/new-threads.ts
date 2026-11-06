@@ -182,7 +182,7 @@ export const newThreadsPart = {
       accountId,
       ...(poolId ? { poolId } : {}),
       provider: account.provider,
-      permissionMode: params.permissionMode ?? 'full',
+      permissionMode: params.permissionMode ?? 'auto',
       status: 'idle',
       createdAt: now,
       updatedAt: now,

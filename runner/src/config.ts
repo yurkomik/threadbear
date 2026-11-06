@@ -153,6 +153,10 @@ export type RunnerJson = {
   // releases (bring-in.ts): every so many days, 'important' or 'off'.
   releases?: { publish?: boolean; signingKey?: string; bringIn?: number | 'important' | 'off' };
   models?: { pool?: string | null; privateFolders?: string[] };
+  // trust.always: folders (and their worktrees) whose patches and Claude
+  // settings load without asking, like Threadbear's own checkout: your own
+  // repos, whose hooks change too often to re-trust each version.
+  trust?: { always?: string[] };
   // icon: an SF Symbol for this runner in lists (machine.ts works one out).
   // rpcUrl: how a Mac app reaches this runner over the tailnet (step 6 part 2).
   // full: true sends tool output to your Convex deployment as well, scrubbed first
@@ -176,6 +180,12 @@ export function expandHome(p: string): string {
   if (p === '~') return os.homedir();
   if (p.startsWith('~/')) return path.join(os.homedir(), p.slice(2));
   return p;
+}
+
+// runner.json `trust.always`, as absolute paths.
+export function alwaysTrusted(home: string): string[] {
+  const always = readRunnerJson(home).trust?.always;
+  return Array.isArray(always) ? always.filter((p): p is string => typeof p === 'string' && p.trim() !== '').map(expandHome) : [];
 }
 
 export function readRunnerJson(home: string): RunnerJson {

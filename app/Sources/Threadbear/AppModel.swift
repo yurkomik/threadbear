@@ -310,7 +310,9 @@ final class AppModel {
     /// kept across launches: a Codex model is no use to a Claude thread.
     private(set) var lastModels: [String: String] = AppModel.loadMemory(AppModel.lastModelKey)
     private(set) var lastEfforts: [String: String] = AppModel.loadMemory(AppModel.lastEffortKey)
-    var newThreadPermission: PermissionMode = .full
+    // Auto by default (Claude Code's own auto mode, with the user's hooks
+    // and rules); full access is picked per thread.
+    var newThreadPermission: PermissionMode = .auto
     /// What the runner says about the Claude and Codex CLIs (`clis.list`,
     /// `clis.updated`). Empty until it's said anything.
     var clis: [CliStatus] = []

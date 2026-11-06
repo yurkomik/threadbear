@@ -311,7 +311,7 @@ extension AppModel {
                 newThreadRunnerPicked = false
                 newThreadRunnerProblem = nil
                 newThreadCwd = nil
-                newThreadPermission = .full
+                newThreadPermission = .auto
                 newThreadAccount = nil
                 newThreadPool = nil
                 newThreadProvider = nil

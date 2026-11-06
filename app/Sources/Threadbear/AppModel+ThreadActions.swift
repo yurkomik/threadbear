@@ -274,7 +274,7 @@ extension AppModel {
                     // from the defaults again, on whichever account then
                     // has the most room. The model and effort stick.
                     newThreadCwd = nil
-                    newThreadPermission = .full
+                    newThreadPermission = .auto
                     newThreadAccount = nil
                     newThreadPool = nil
                     newThreadProvider = nil

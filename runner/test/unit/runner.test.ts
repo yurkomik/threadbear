@@ -36,7 +36,7 @@ test('create starts a turn: user.message, turn.started, a CLI with a pre-assigne
   assert.match(s.opts.sessionId, /^[0-9a-f-]{36}$/);
   assert.equal(s.opts.model, 'claude-haiku-5-5');
   assert.equal(s.opts.account.id, 'claude-3');
-  assert.equal(s.opts.permissionMode, 'full');
+  assert.equal(s.opts.permissionMode, 'auto');
   // The turnId goes with the message, so the CLI's turns can be matched to it.
   assert.deepEqual(s.sent, [{ id: turnId, text: 'Fix the tests\nmore detail here', images: [] }]);
   const evs = h.events(thread.id);
