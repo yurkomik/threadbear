@@ -170,7 +170,7 @@ export function checkSummary(t: Obj): string[] {
   const problems: string[] = [];
   for (const k of ['id', 'title', 'cwd', 'accountId', 'preview']) if (!isStr(t[k])) problems.push(k);
   if (!PROVIDERS.includes(t.provider)) problems.push('provider');
-  if (t.permissionMode !== 'full' && t.permissionMode !== 'ask') problems.push('permissionMode');
+  if (!['full', 'ask', 'auto'].includes(t.permissionMode)) problems.push('permissionMode');
   if (!STATUSES.includes(t.status)) problems.push('status');
   for (const k of ['live', 'needsYou']) if (typeof t[k] !== 'boolean') problems.push(k);
   for (const k of ['createdAt', 'updatedAt', 'lastActivityAt']) if (!isIso(t[k])) problems.push(k);
